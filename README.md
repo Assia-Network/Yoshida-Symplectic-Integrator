@@ -7,10 +7,10 @@ This repository contains an implementation of the **Yoshida Method**, a high-ord
 ## Theoretical Background
 Unlike standard numerical integration methods (such as Runge-Kutta), Yoshida's algorithm is *symplectic*, meaning it preserves the phase-space volume of the system. This critical property guarantees that errors in the total energy (the Hamiltonian) are bounded and do not grow linearly over time, allowing for highly stable and accurate integrations in astronomical simulations spanning thousands of years.
 
-The integrator relies on the composition technique developed by **Haruo Yoshida**, where a basic leapfrog integrator is applied over specifically derived fractional time steps. By executing the exact sequence of forward and backward steps, lower-order error terms cancel out perfectly, yielding a robust 4th-order integrator.
+The integrator relies on the composition technique developed by **Haruo Yoshida**. By executing an exact sequence of forward and backward steps derived recursively, lower-order error terms cancel out perfectly. The implementation provided dynamically calculates the necessary coefficients, allowing the method to scale to arbitrary even orders (e.g., 4th, 6th, 8th order).
 
 ### Key Features:
-* **High-Order Symplectic Integrator:** 4th-order implementation based on Yoshida's exact coefficients.
+* **Arbitrary High-Order Symplectic Integrator:** Dynamic generation of higher-order coefficients via Yoshida's recursive composition techniques.
 * **Strict Energy Conservation:** Superior stability of the Hamiltonian compared to non-conservative methods.
 * **$N$-body Problem:** Full gravitational interaction modeling for 10 bodies (Sun + 9 planets/dwarf planets).
 * **Cinematic Visualizations:** High-quality 4K 60fps 3D animations and trajectory rendering using **Manim**, alongside standard spatial plotting with **Matplotlib** and **PyVista**.
