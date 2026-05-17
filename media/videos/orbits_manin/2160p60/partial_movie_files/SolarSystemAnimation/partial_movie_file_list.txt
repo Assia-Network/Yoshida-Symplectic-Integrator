@@ -1,0 +1,3 @@
+# This file is used internally by FFMPEG.
+file 'file:/media/jesus/jesus_linux/Metodo de yoshida /media/videos/orbits_manin/2160p60/partial_movie_files/SolarSystemAnimation/1834943068_3081973742_1309703764.mp4'
+file 'file:/media/jesus/jesus_linux/Metodo de yoshida /media/videos/orbits_manin/2160p60/partial_movie_files/SolarSystemAnimation/864979988_233831863_816831767.mp4'

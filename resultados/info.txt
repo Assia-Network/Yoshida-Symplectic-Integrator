@@ -1,7 +1,0 @@
-Nota sobre los datos: Para visualizar las animaciones, 
-es necesario ejecutar primero el notebook main.ipynb. Al hacerlo, 
-se generarán automáticamente en este directorio los archivos momentos.npz 
-y posiciones.npz (aprox. 500 MB cada uno). Estos archivos han sido excluidos 
-del repositorio para optimizar el espacio, pero una vez creados localmente, 
-el resto de los scripts los detectará sin necesidad de configuración 
-adicional.

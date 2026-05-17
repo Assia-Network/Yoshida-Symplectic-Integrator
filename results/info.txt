@@ -1,0 +1,8 @@
+Data Note: To visualize the animations, 
+you must first run the main.ipynb notebook. Doing so 
+will automatically generate the momenta.npz 
+and positions.npz files (approx. 500 MB each) in this directory. 
+These files have been excluded from the repository 
+to optimize space, but once created locally, 
+the rest of the scripts will detect them without the need 
+for additional configuration.

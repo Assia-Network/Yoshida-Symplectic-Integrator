@@ -1,38 +1,53 @@
-# Método de Yoshida: Simulación Gravitacional de 10 Cuerpos
+# Yoshida Method: 10-Body Gravitational Simulation
 
-Este repositorio contiene una implementación del **Método de Yoshida**, un integrador de alto orden diseñado para la simulación precisa de sistemas Hamiltonianos. Se aplica aquí para resolver la dinámica de un sistema gravitacional de 10 cuerpos en interacción mutua.
+![Manim 4K Animation](images/SolarSystemAnimation_ManimCE_v0.19.1.png)
 
+This repository contains an implementation of the **Yoshida Method**, a high-order symplectic integrator designed for the precise simulation of Hamiltonian systems. Here, it is applied to solve the complex dynamics of a 10-body gravitational system (the Solar System) in mutual interaction over long periods of time.
 
+## 🌌 Theoretical Background
+Unlike standard numerical integration methods (such as Runge-Kutta), Yoshida's algorithm is *symplectic*, meaning it preserves the phase-space volume of the system. This critical property guarantees that errors in the total energy (the Hamiltonian) are bounded and do not grow linearly over time, allowing for highly stable and accurate integrations in astronomical simulations spanning thousands of years.
 
-## 🌌 Descripción Teórica
-A diferencia de los métodos de integración estándar (como Runge-Kutta), el algoritmo de Yoshida preserva la estructura del espacio de fases. Esto garantiza que los errores en la energía total del sistema no crezcan linealmente con el tiempo, permitiendo integraciones estables y precisas en simulaciones de largo plazo.
+The integrator relies on the composition technique developed by **Haruo Yoshida**, where a basic leapfrog integrator is applied over specifically derived fractional time steps. By executing the exact sequence of forward and backward steps, lower-order error terms cancel out perfectly, yielding a robust 4th-order integrator.
 
-El integrador se basa en la técnica de composición desarrollada por **Haruo Yoshida**, donde un integrador básico de salto de rana (*leapfrog*) se aplica a varios intervalos de tiempo específicos. Al utilizar la secuencia correcta de pasos, los errores de orden inferior se compensan, permitiendo generar fácilmente un integrador de 4º orden.
-
-### Características principales:
-* **Integrador de Alto Orden:** Implementación de 4º orden basada en coeficientes de Yoshida.
-* **Conservación de Energía:** Estabilidad superior del Hamiltoniano frente a métodos no conservativos.
-* **Problema de N-cuerpos:** Modelado de 10 cuerpos con interacción gravitatoria completa.
-* **Visualización:** Generación de animaciones 3D de las trayectorias mediante **PyVista** y **Matplotlib**.
-
----
-
-## Generación de Datos
-Los archivos de resultados no se incluyen en el repositorio debido a su tamaño (~1 GB en total).
-
-> **Instrucciones:** Para realizar las visualizaciones y animaciones, ejecuta primero el notebook `main.ipynb`. Este generará automáticamente los archivos `momentos.npz` y `posiciones.npz` en el directorio resultados. Una vez generados, los scripts de visualización los detectarán de forma automática.
+### Key Features:
+* **High-Order Symplectic Integrator:** 4th-order implementation based on Yoshida's exact coefficients.
+* **Strict Energy Conservation:** Superior stability of the Hamiltonian compared to non-conservative methods.
+* **$N$-body Problem:** Full gravitational interaction modeling for 10 bodies (Sun + 9 planets/dwarf planets).
+* **Cinematic Visualizations:** High-quality 4K 60fps 3D animations and trajectory rendering using **Manim**, alongside standard spatial plotting with **Matplotlib** and **PyVista**.
 
 ---
 
-##  Requisitos
-Para ejecutar este proyecto, necesitas tener instalado:
-* Python 3.x
+## 📊 Energy Conservation & Stability
+The following plots demonstrate the symplectic nature of the integrator, showcasing how the total energy and its residuals remain bounded despite simulating 10,000 physical years at $\Delta t = 0.0005$.
+
+![Hamiltonian Energy Conservation](images/Hamiltonian%20Energy%20Conservation.png)
+![Total Energy Residual](images/Total%20Energy%20Residual.png)
+
+*(Additional 3D spatial render using PyVista)*
+![Solar System 3D](images/solar_system_3d.png)
+
+---
+
+## 🚀 Data Generation
+The raw output files are not included in this repository due to their massive size (~1 GB in total, representing over 20 million integration steps).
+
+> **Instructions:** To render the visualizations and cinematic animations, first execute the `main.ipynb` notebook. This will automatically generate the `momentums.npz` and `positions.npz` files in the `results/` directory. Once generated, the visualization scripts will detect and extract the data dynamically.
+
+---
+
+## 💻 Requirements
+To run the numerical engine and compile the animations, you will need:
+* Python 3.12+
 * NumPy
-* Matplotlib (para las animaciones y gráficas)
-* PyVista (para la visualización 3D)
+* Matplotlib (for analytical plots)
+* PyVista (for interactive 3D visualizations)
+* **Manim Community** (for 4K mathematical animations)
 
 ```python
-# Ejemplo rápido para cargar los datos una vez generados
+# Quick snippet to load the physical data once generated
 import numpy as np
-posiciones = np.load('posiciones.npz')
-print(posiciones.files)
+
+# Load the positions array
+data = np.load('results/positions.npz')
+positions = data['pos'] # Shape: (timesteps, bodies, coordinates)
+print(f"Data successfully loaded. Shape: {positions.shape}")
